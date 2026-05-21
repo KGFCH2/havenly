@@ -28,7 +28,7 @@
 Havenly is a modern, high-fidelity rental marketplace inspired by premium discovery experiences.  
 It focuses on rich visuals, smooth interactions, responsive layouts, and contributor-friendly architecture.
 
-> `ELUSOC 2026 Mode`: This repo is actively maintained for open-source collaboration with a Minecraft-inspired community vibe.
+> `ELUSOC 2026 Official Project`: This repo is officially selected and actively maintained for open-source collaboration.
 
 ---
 

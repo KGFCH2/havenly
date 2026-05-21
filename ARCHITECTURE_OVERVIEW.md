@@ -25,11 +25,11 @@ Havenly follows a modern **JAMstack architecture** using Next.js for the fronten
 ```
 
 ### 1. Frontend Design System
-- **Core**: Next.js 15 (App Router)
+- **Core**: Next.js 16 (App Router)
 - **Styling**: Tailwind CSS for utility-first styling.
 - **Components**: Radix UI primitives for accessible, high-quality interactive components.
 - **Icons**: Lucide React for consistent iconography.
-- **Animations**: Framer Motion and CSS transitions for a premium feel.
+- **Animations**: CSS transitions and animation utilities for a premium feel.
 
 ### 2. Data Flow
 **Property Discovery:**
@@ -63,5 +63,5 @@ Payment Integration → Database Update → User Confirmation
 
 ---
 
-**Last Updated**: April 2026  
+**Last Updated**: May 2026  
 **Maintained By**: Akshay Kumar

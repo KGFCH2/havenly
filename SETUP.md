@@ -18,11 +18,10 @@ pnpm dev
 
 App runs at `http://localhost:3000`.
 
-## 3) Useful Commands
+## 2) Useful Commands
 
 ```sh
 pnpm dev      # start dev server
-pnpm lint     # lint the codebase
 pnpm build    # production build
 pnpm start    # start production build locally
 ```

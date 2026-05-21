@@ -52,7 +52,6 @@ Once you've been assigned an issue and have completed the work, you can submit a
 - Run:
 
     ```sh
-    pnpm lint
     pnpm build
     ```
 

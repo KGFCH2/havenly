@@ -1,64 +1,64 @@
 name: Welcome New Pull Requests
 
 on:
-pull_request:
-types: [opened]
+  pull_request:
+    types: [opened]
 
 jobs:
-welcome-pr:
-runs-on: ubuntu-latest
+  welcome-pr:
+    runs-on: ubuntu-latest
 
-permissions:
-  pull-requests: write
-  issues: write
+    permissions:
+      pull-requests: write
+      issues: write
 
-steps:
-  - name: Add welcome comment
-    uses: actions/github-script@v6
-    with:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
-      script: |
-        const prNumber = context.issue.number;
-        const owner = context.repo.owner;
-        const repo = context.repo.repo;
+    steps:
+      - name: Add welcome comment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = context.issue.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
 
-        const commentBody = `
-        ⚔️ **Quest Submitted — Under Review**
+            const commentBody = `
+            ⚔️ **Quest Submitted — Under Review**
 
-        Thank you for contributing to **Havenly – Premium Rental Marketplace**.
+            Thank you for contributing to **Havenly – Premium Rental Marketplace**.
 
-        ### 🏕️ Pre-Quest Checklist
+            ### 🏕️ Pre-Quest Checklist
 
-        - 🔗 Ensure your Pull Request is linked to an assigned issue
-        - 🎯 Reference the issue number in the PR description (e.g. Closes #123)
-        - ✅ Your branch is up to date with \`main\`
-        - 🧪 Changes tested locally
-        - 📖 README reviewed
-        - 📚 CONTRIBUTING guide reviewed
+            - 🔗 Ensure your Pull Request is linked to an assigned issue
+            - 🎯 Reference the issue number in the PR description (e.g. \`Closes #123\`)
+            - ✅ Your branch is up to date with \`main\`
+            - 🧪 Changes tested locally
+            - 📖 README reviewed
+            - 📚 CONTRIBUTING guide reviewed
 
-        ### 🧭 Review Journey
+            ### 🧭 Review Journey
 
-        Your contribution will be reviewed for:
+            Your contribution will be reviewed for:
 
-        - Code Quality
-        - User Experience
-        - Project Standards
-        - Documentation
+            - Code Quality
+            - User Experience
+            - Project Standards
+            - Documentation
 
-        ### 🗺️ Quest Status
+            ### 🗺️ Quest Status
 
-        🟡 Under Explorer Review
+            🟡 Under Explorer Review
 
-        Your contribution is now traveling through the Havenly review pipeline.
+            Your contribution is now traveling through the Havenly review pipeline.
 
-        🚀 **Good luck, Pathfinder.**
+            🚀 **Good luck, Pathfinder.**
 
-        **— Havenly Team**
-        `;
+            **— Havenly Team**
+            `;
 
-        await github.rest.issues.createComment({
-          owner,
-          repo,
-          issue_number: prNumber,
-          body: commentBody
-        });
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: prNumber,
+              body: commentBody
+            });

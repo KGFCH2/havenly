@@ -5,6 +5,7 @@ import { Calendar, Users, Star, Share2, Heart } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Property } from '@/lib/dummy-data';
+import { toast } from 'sonner';
 
 interface BookingSidebarProps {
   property: Property;
@@ -21,6 +22,35 @@ export function BookingSidebar({ property }: BookingSidebarProps) {
   ) : 0;
 
   const totalPrice = nights * property.pricePerNight;
+
+  const handleReserve = () => {
+    if (!checkIn || !checkOut) {
+      toast.error('Please select both Check-in and Check-out dates.');
+      return;
+    }
+
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (checkInDate < today) {
+      toast.error('Check-in date cannot be in the past.');
+      return;
+    }
+
+    if (checkOutDate <= checkInDate) {
+      toast.error('Check-out date must be after the Check-in date.');
+      return;
+    }
+
+    if (guests <= 0 || guests > property.capacity.guests) {
+      toast.error(`Guest count must be between 1 and ${property.capacity.guests}.`);
+      return;
+    }
+
+    toast.success(`Successfully reserved ${property.title} for ${nights} nights!`);
+  };
 
   return (
     <Card className="p-6 border-border sticky top-24 space-y-6">
@@ -97,7 +127,7 @@ export function BookingSidebar({ property }: BookingSidebarProps) {
       </div>
 
       {/* Reserve Button */}
-      <Button className="w-full bg-primary text-primary-foreground py-3 text-base font-semibold hover:opacity-90 transition">
+      <Button onClick={handleReserve} className="w-full bg-primary text-primary-foreground py-3 text-base font-semibold hover:opacity-90 transition">
         Reserve
       </Button>
 
@@ -145,3 +175,4 @@ export function BookingSidebar({ property }: BookingSidebarProps) {
     </Card>
   );
 }
+

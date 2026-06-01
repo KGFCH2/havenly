@@ -7,26 +7,26 @@ assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+# Problem
+Describe the issue clearly.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+# Current Behavior
+Explain existing behavior.
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+# Why This Improvement Is Needed
+Explain impact on users/developers.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+# Proposed Solution
+Explain the implementation approach.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+# Expected Outcome
+Explain expected improvements.
 
-**Additional context**
-Add any other context about the problem here.
+# Environment Details
+- OS: [e.g. Windows, macOS]
+- Browser: [e.g. Chrome, Firefox]
+- Node version: [e.g. v20.x]
+- Havenly package version: [e.g. 0.1.0]
+
+# Additional Notes
+Optional technical/contextual notes.

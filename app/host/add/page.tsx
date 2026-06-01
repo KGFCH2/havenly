@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { categories, amenities } from '@/lib/dummy-data';
 import { ChevronLeft, ChevronRight, Upload, X } from 'lucide-react';
+import { toast } from 'sonner';
+
 import {
   Wifi,
   UtensilsCrossed,
@@ -68,9 +70,52 @@ export default function AddPropertyPage() {
   const currentStepIndex = steps.findIndex((s) => s.id === currentStep);
 
   const goToNextStep = () => {
+    if (currentStep === 'basic') {
+      if (!formData.title.trim()) {
+        toast.error('Title is required');
+        return;
+      }
+      if (!formData.description.trim()) {
+        toast.error('Description is required');
+        return;
+      }
+      if (!formData.category) {
+        toast.error('Category is required');
+        return;
+      }
+      if (!formData.city.trim() || !formData.state.trim()) {
+        toast.error('City and State are required');
+        return;
+      }
+      if (formData.guests <= 0 || formData.bedrooms <= 0 || formData.beds <= 0 || formData.bathrooms <= 0) {
+        toast.error('Capacity counts must be positive numbers');
+        return;
+      }
+    } else if (currentStep === 'images') {
+      if (uploadedImages.length === 0) {
+        toast.error('Please upload at least one image');
+        return;
+      }
+    } else if (currentStep === 'pricing') {
+      const price = parseFloat(formData.pricePerNight);
+      if (isNaN(price) || price <= 0) {
+        toast.error('Please enter a valid positive price per night');
+        return;
+      }
+    } else if (currentStep === 'amenities') {
+      if (selectedAmenities.length === 0) {
+        toast.error('Please select at least one amenity');
+        return;
+      }
+    }
+
     if (currentStepIndex < steps.length - 1) {
       setCurrentStep(steps[currentStepIndex + 1].id);
     }
+  };
+
+  const handlePublish = () => {
+    toast.success('Property published successfully!');
   };
 
   const goToPreviousStep = () => {
@@ -78,6 +123,7 @@ export default function AddPropertyPage() {
       setCurrentStep(steps[currentStepIndex - 1].id);
     }
   };
+
 
   const toggleAmenity = (amenityId: string) => {
     setSelectedAmenities((prev) =>
@@ -520,7 +566,7 @@ export default function AddPropertyPage() {
           </Button>
 
           {currentStep === 'review' ? (
-            <Button className="bg-primary text-primary-foreground flex items-center gap-2">
+            <Button onClick={handlePublish} className="bg-primary text-primary-foreground flex items-center gap-2">
               Publish Property
             </Button>
           ) : (

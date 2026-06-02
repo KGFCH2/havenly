@@ -62,6 +62,19 @@ export function Navbar() {
             >
               Services
             </Link>
+<Link
+              href="/favorites"
+              className={`relative flex flex-col items-center ${
+                pathname === "/favorites"
+                  ? "font-semibold text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Favorites
+              {pathname === "/favorites" && (
+                <span className="absolute -bottom-2 w-4 border-b-2 border-foreground rounded-full"></span>
+              )}
+            </Link>
 
           </div>
 

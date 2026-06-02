@@ -1,0 +1,53 @@
+name: Sync Issue Labels to PR
+
+on:
+  pull_request_target:
+    types: [closed]
+
+jobs:
+  sync-labels:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      issues: read
+
+    steps:
+      - name: Sync labels from linked issues
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            const issueRegex = /(?:close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s+#(\d+)/gi;
+            const matches = [...pr.body.matchAll(issueRegex)];
+
+            if (!matches.length) {
+              console.log('No linked issues found in PR body.');
+              return;
+            }
+
+            for (const match of matches) {
+              const issueNum = match[1];
+              try {
+                const { data: issue } = await github.rest.issues.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: parseInt(issueNum),
+                });
+
+                const labels = issue.labels.map(l => l.name);
+                if (labels.length) {
+                  await github.rest.issues.addLabels({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: pr.number,
+                    labels: labels,
+                  });
+                  console.log(`Added labels [${labels.join(', ')}] from issue #${issueNum} to PR #${pr.number}`);
+                }
+              } catch (err) {
+                console.log(`Failed to process issue #${issueNum}: ${err.message}`);
+              }
+            }

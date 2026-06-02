@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Search, Menu, X, LogOut, LayoutDashboard, Home } from 'lucide-react';
+import { usePathname } from "next/navigation";
 import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -10,7 +11,7 @@ import { Input } from '@/components/ui/input';
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-
+  const pathname = usePathname();
   return (
     <nav className="sticky top-0 z-40 border-b border-border bg-white pb-6 pt-5">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -27,16 +28,41 @@ export function Navbar() {
 
           {/* Center Tabs - Hidden on mobile */}
           <div className="hidden md:flex flex-1 justify-center px-6 gap-8 text-[16px]">
-            <Link href="/" className="font-semibold text-foreground relative flex flex-col items-center">
+            <Link
+              href="/"
+              className={`relative flex flex-col items-center ${
+                pathname === "/"
+                  ? "font-semibold text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
               Homes
-              <span className="absolute -bottom-2 w-4 border-b-2 border-foreground rounded-full"></span>
+              {pathname === "/" && (
+                <span className="absolute -bottom-2 w-4 border-b-2 border-foreground rounded-full"></span>
+              )}
             </Link>
-            <Link href="/" className="text-muted-foreground hover:text-foreground hover:bg-muted/50 px-4 py-1 -my-1 rounded-full transition">
+
+            <Link
+              href="/experiences"
+              className={`relative flex flex-col items-center ${
+                pathname === "/experiences"
+                  ? "font-semibold text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
               Experiences
+              {pathname === "/experiences" && (
+                <span className="absolute -bottom-2 w-4 border-b-2 border-foreground rounded-full"></span>
+              )}
             </Link>
-            <Link href="/" className="text-muted-foreground hover:text-foreground hover:bg-muted/50 px-4 py-1 -my-1 rounded-full transition">
+
+            <Link
+              href="/"
+              className="text-muted-foreground hover:text-foreground"
+            >
               Services
             </Link>
+
           </div>
 
           {/* Desktop Right Menu */}

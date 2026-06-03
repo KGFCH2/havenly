@@ -37,13 +37,13 @@ function PropertySection({ title, items, locationName }: PropertySectionProps) {
         </div>
         <div className="hidden md:flex items-center gap-2">
           <button
-            onClick={() => scroll('left')}
+            onClick={() => scroll('left')} aria-label="Scroll left"
             className="flex h-8 w-8 items-center justify-center rounded-full border border-black/10 bg-white shadow-sm hover:shadow-md hover:scale-[1.04] transition"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
           </button>
           <button
-            onClick={() => scroll('right')}
+            onClick={() => scroll('right')} aria-label="Scroll right"
             className="flex h-8 w-8 items-center justify-center rounded-full border border-black/10 bg-white shadow-sm hover:shadow-md hover:scale-[1.04] transition"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>

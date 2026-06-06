@@ -13,7 +13,7 @@ interface PropertyCardProps {
   priority?: boolean;
 }
 
-const getFavorites = (): Property[] => {
+export const getFavorites = (): Property[] => {
   if (typeof window === 'undefined') return [];
 
   try {

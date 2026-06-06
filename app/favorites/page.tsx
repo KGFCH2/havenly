@@ -4,16 +4,14 @@ import { useEffect, useState } from 'react';
 import { PropertyCard } from '@/components/PropertyCard';
 import { Property } from '@/lib/dummy-data';
 import { Navbar } from '@/components/Navbar';
-import {Footer} from '@/components/Footer';
+import { Footer } from '@/components/Footer';
+import { getFavorites } from '@/components/PropertyCard';
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<Property[]>([]);
 
   useEffect(() => {
-    const saved = JSON.parse(
-      localStorage.getItem('favorites') || '[]'
-    );
-    setFavorites(saved);
+    setFavorites(getFavorites());
   }, []);
 
   return (

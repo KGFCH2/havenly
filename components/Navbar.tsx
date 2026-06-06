@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {Heart} from "lucide-react"
+import { Heart} from 'lucide-react'
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -203,9 +203,9 @@ export function Navbar() {
             </Link>
           <Link
               href="/favorites" className='block'>
-  <Button className="w-full px-0 py-2 text-left font-medium text-foreground hover:bg-muted bg-transparent rounded-lg flex items-center gap-2 mb-2">
+              <Button className="w-full px-0 py-2 text-left font-medium text-foreground hover:bg-muted bg-transparent rounded-lg flex items-center gap-2 mb-2">
 
-              <Heart size = {12}/> Favorites
+              <Heart size={12}/> Favorites
               </Button>
             </Link>
 
